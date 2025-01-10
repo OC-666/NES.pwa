@@ -1,0 +1,13 @@
+{
+  "license": "UNLICENSED",
+  "type": "module",
+  "workspaces": [
+    "app/*"
+  ],
+  "dependencies": {
+    "hyperapp": "^2.0.22"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.2"
+  }
+}
