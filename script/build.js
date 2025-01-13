@@ -10,7 +10,7 @@ function main() {
 
   /** @type {import('esbuild').BuildOptions} */
   const options = {
-    entryPoints: ['src/main.ts'],
+    entryPoints: ['src/main.tsx'],
     outdir: 'public/_c',
     bundle: true,
     logLevel: 'debug',
