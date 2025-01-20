@@ -1,1 +1,6 @@
-{}
+{
+  "scripts": {
+    "serve": "node ../../script/build dev",
+    "build": "node ../../script/build pro"
+  }
+}
