@@ -114,7 +114,7 @@ interface I_keyboard_props {
 export
 const Keyboard: FC<I_keyboard_props> = props => {
   const size = props.size || 24
-  return <svg width={size} height={size} viewBox="0 0 48 48">
+  return <svg width={size} height={size} viewBox="0 2 48 50"> {/* 0 0 48 48 */}
     <g fill="none"
       stroke="currentColor" strokeWidth="4"
       strokeLinejoin="round" strokeLinecap="round"
