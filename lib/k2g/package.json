@@ -1,0 +1,9 @@
+{
+  "name": "k2g",
+  "version": "0.0.0",
+  "type": "module",
+  "exports": {
+    "./nes": "./nes.tsx",
+    "./style": "./style.css"
+  }
+}

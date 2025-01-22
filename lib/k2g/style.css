@@ -1,0 +1,15 @@
+/* gamepad button */
+.k2g {
+  .gp-btn {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+
+    position: relative;
+
+    svg {
+      display: block;
+    }
+  }
+}
