@@ -1,16 +1,19 @@
-import { useState } from 'react'
-import { I_NES_gamepad_btn, NES_gamepad_map } from 'k2g/nes'
-import { app_state } from '../sdd'
+import { FC } from 'react'
+import { NES_gamepad_map } from 'k2g/nes'
+import { I_app_state } from '../sdd'
 
 import 'k2g/style'
 
+interface I_app_props {
+  app_state: I_app_state
+}
+
 export
-const App = () => {
-  const [active, set_active] = useState<I_NES_gamepad_btn | null>(null)
+const App: FC<I_app_props> = props => {
   return <div style={{ padding: 200 }}>
     <NES_gamepad_map
-      sdd={app_state.user_settings.control.game}
-      active={{ val: active, set: set_active }}
+      map={props.app_state.user_settings.control.game}
+      ui={props.app_state.ui.settings.control}
     />
   </div>
 }

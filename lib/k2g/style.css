@@ -1,6 +1,7 @@
 /* gamepad button */
 .k2g {
   .gp-btn {
+    display: block;
     background-color: transparent;
     border: none;
     outline: none;

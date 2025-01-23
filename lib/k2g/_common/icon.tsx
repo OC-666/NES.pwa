@@ -1,4 +1,4 @@
-import { CSSProperties, FC, ReactNode } from 'react'
+import { CSSProperties, FC, } from 'react'
 
 interface I_arrow_props {
   className?: string
@@ -20,36 +20,64 @@ const Arrow: FC<I_arrow_props> = props => {
     <polygon
       fill='currentColor'
       style={{
+        transformOrigin: 'center',
         transform: props.direction === undefined
           ? undefined
-          : typeof(props.direction) === 'number'
-            ? props.direction + 'deg'
-            : ({
-              up: undefined,
-              down: '180deg',
-              left: '-90deg',
-              right: '90deg',
-            })[props.direction]
+          : `rotate(${
+            typeof(props.direction) === 'number'
+              ? props.direction + 'deg'
+              : ({
+                up: undefined,
+                down: '180deg',
+                left: '-90deg',
+                right: '90deg',
+              })[props.direction]
+            })`,
       }}
       points={`${size/2}, 0 0,${size} ${size},${size}`} 
     />
   </svg>
 }
 
-interface I_line_props {
+interface I_line2kb_props {
   unit2?: number
   type: 'top' | 'bottom' | 'left' | 'right'
     | 'left_top' | 'right_top' | 'left_bottom' | 'right_bottom'
-  children: ReactNode
+  target: string
+  className?: string
 }
 
 export
-const Line: FC<I_line_props> = props => {
+const Line2kb: FC<I_line2kb_props> = props => {
   const unit2 = props.unit2 || 16
   const unit = unit2 / 2
   const unit3 = unit * 3
-  return <>
-    {props.children}
+  return <div
+    className={props.className}
+    style={{
+      position: 'absolute',
+      ...(() => {
+        switch(props.type) {
+          case 'left':
+            return { right: '100%', top: '50%' }
+          case 'right':
+            return { left: '100%', top: '50%' }
+          case 'top':
+            return { bottom: '100%', left: '50%' }
+          case 'bottom':
+            return { top: '100%', left: '50%' }
+          case 'left_top':
+            return { right: '50%', bottom: '100%' }
+          case 'right_top':
+            return { left: '50%', bottom: '100%' }
+          case 'left_bottom':
+            return { right: '50%', top: '100%' }
+          case 'right_bottom':
+            return { left: '50%', top: '100%' }
+        }
+      })(),
+    }}
+  >
     <svg
       width={{
         left: unit2, right: unit2, // 2n
@@ -63,29 +91,6 @@ const Line: FC<I_line_props> = props => {
         left_top: unit2, right_top: unit2, // 2n
         left_bottom: unit2, right_bottom: unit2,
       }[props.type]}
-      style={{
-        position: 'absolute',
-        ...(() => {
-          switch(props.type) {
-            case 'left':
-              return { right: '100%', top: '50%' }
-            case 'right':
-              return { left: '100%', top: '50%' }
-            case 'top':
-              return { bottom: '100%', left: '50%' }
-            case 'bottom':
-              return { top: '100%', left: '50%' }
-            case 'left_top':
-              return { right: '50%', bottom: '100%' }
-            case 'right_top':
-              return { left: '50%', bottom: '100%' }
-            case 'left_bottom':
-              return { right: '50%', top: '100%' }
-            case 'right_bottom':
-              return { left: '50%', top: '100%' }
-          }
-        })(),
-      }}
     >
       <path stroke='currentColor' fill='none' d={(() => {
         switch(props.type) {
@@ -104,7 +109,35 @@ const Line: FC<I_line_props> = props => {
         }
       })()} />
     </svg>
-  </>
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      position: 'absolute',
+      ...(() => {
+        switch(props.type) {
+          case 'left':
+            return { right: '100%', top: 0, transform: 'translateY(-50%)' }
+          case 'right':
+            return { left: '100%', top: 0, transform: 'translateY(-50%)' }
+          case 'top':
+            return { bottom: '100%', left: 0, transform: 'translateX(-50%)' }
+          case 'bottom':
+            return { top: '100%', left: 0, transform: 'translateX(-50%)' }
+          case 'left_bottom':
+            return { right: '100%', top: '100%', transform: 'translateY(-50%)' }
+          case 'left_top':
+            return { right: '100%', top: 0, transform: 'translateY(-50%)' }
+          case 'right_bottom':
+            return { left: '100%', top: '100%', transform: 'translateY(-50%)' }
+          case 'right_top':
+            return { left: '100%', top: 0, transform: 'translateY(-50%)' }
+        }
+      })(),
+    }}>
+      <Keyboard />
+      <div>{props.target}</div>
+    </div>
+  </div>
 }
 
 interface I_keyboard_props {
@@ -114,14 +147,18 @@ interface I_keyboard_props {
 export
 const Keyboard: FC<I_keyboard_props> = props => {
   const size = props.size || 24
-  return <svg width={size} height={size} viewBox="0 2 48 50"> {/* 0 0 48 48 */}
+  return <svg
+    width={size}
+    height={size}
+    viewBox="0 0 48 48" // 0 0 48 48
+  >
     <g fill="none"
       stroke="currentColor" strokeWidth="4"
       strokeLinejoin="round" strokeLinecap="round"
     >
       <rect x="4" y="18" width="40" height="24" rx="2" />
       <path d="M17 36H31" />
-      <path d="M16 18 V12 H32 V 6" strokeWidth="2" />
+      <path d="M16 18 V10 H32 V 2" />
     </g>
     <g fill="currentColor">
       <circle cx="14" cy="24" r="2"/>

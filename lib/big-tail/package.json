@@ -1,0 +1,7 @@
+{
+  "name": "big-tail",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts"
+  }
+}
