@@ -1,7 +1,6 @@
 import { CSSProperties, FC, } from 'react'
 
 interface I_arrow_props {
-  className?: string
   style?: CSSProperties
   size?: number
   direction?: 'up' | 'down' | 'left' | 'right' | number
@@ -12,9 +11,8 @@ const Arrow: FC<I_arrow_props> = props => {
   const size = props.size ?? 16
   return <svg
     xmlns='http://www.w3.org/2000/svg'
-    width={size}
-    height={size}
-    className={props.className}
+    viewBox={`0 0 ${size} ${size}`}
+    className='arrow'
     style={props.style}
   >
     <polygon
@@ -39,21 +37,23 @@ const Arrow: FC<I_arrow_props> = props => {
   </svg>
 }
 
+type I_position = 'top' | 'bottom' | 'left' | 'right'
+  | 'left_top' | 'right_top' | 'left_bottom' | 'right_bottom'
+
 interface I_line2kb_props {
-  unit2?: number
-  type: 'top' | 'bottom' | 'left' | 'right'
-    | 'left_top' | 'right_top' | 'left_bottom' | 'right_bottom'
+  type: I_position
   target: string
-  className?: string
 }
 
+const format_keyname = (key: string) =>
+  (key.length === 4 && key.indexOf('Key') === 0)
+    ? key.slice(3)
+    : key
+
 export
-const Line2kb: FC<I_line2kb_props> = props => {
-  const unit2 = props.unit2 || 16
-  const unit = unit2 / 2
-  const unit3 = unit * 3
-  return <div
-    className={props.className}
+const Line2kb: FC<I_line2kb_props> = props =>
+  <div
+    className='line2kb'
     style={{
       position: 'absolute',
       ...(() => {
@@ -78,40 +78,8 @@ const Line2kb: FC<I_line2kb_props> = props => {
       })(),
     }}
   >
-    <svg
-      width={{
-        left: unit2, right: unit2, // 2n
-        top: 1, bottom: 1, // 1px
-        left_top: unit3, right_top: unit3, // 3n
-        left_bottom: unit3, right_bottom: unit3,
-      }[props.type]}
-      height={{
-        left: 1, right: 1, // 1px
-        top: unit2, bottom: unit2, // 2n
-        left_top: unit2, right_top: unit2, // 2n
-        left_bottom: unit2, right_bottom: unit2,
-      }[props.type]}
-    >
-      <path stroke='currentColor' fill='none' d={(() => {
-        switch(props.type) {
-          case 'left': case 'right':
-            return `M 0 0 H ${unit2}`
-          case 'top': case 'bottom':
-            return `M 0 0 V ${unit2}`
-          case 'left_top':
-            return `M 0 0 H ${unit2} L ${unit3} ${unit2}`
-          case 'right_top':
-            return `M 0 ${unit2} L ${unit} 0 H ${unit3}`
-          case 'left_bottom':
-            return `M 0 ${unit2} H ${unit2} L ${unit3} 0`
-          case 'right_bottom':
-            return `M 0 0 L ${unit} ${unit2} H ${unit3}`
-        }
-      })()} />
-    </svg>
+    <Line type={props.type} />
     <div style={{
-      display: 'flex',
-      alignItems: 'center',
       position: 'absolute',
       ...(() => {
         switch(props.type) {
@@ -134,24 +102,63 @@ const Line2kb: FC<I_line2kb_props> = props => {
         }
       })(),
     }}>
-      <Keyboard />
-      <div>{props.target}</div>
+      {/* 注意：上面的 div 提供定位，下面的 div 提供样式 */}
+      <div className={'label'}>
+        <Keyboard />
+        <span>{format_keyname(props.target)}</span>
+      </div>
     </div>
   </div>
+
+interface I_line_props {
+  type: I_position
 }
 
-interface I_keyboard_props {
-  size?: number
-}
+const Line: FC<I_line_props> = props =>
+  // const unit = 8
+  <svg
+    className={{
+      left: 'h-line', right: 'h-line',
+      top: 'v-line', bottom: 'v-line',
+      left_top: 'line', right_top: 'line',
+      left_bottom: 'line', right_bottom: 'line',
+    }[props.type]}
+    viewBox={`0 0
+      ${{
+        left: 16, right: 16, // 2n
+        top: 3, bottom: 3, // 3px
+        left_top: 24, right_top: 24, // 3n
+        left_bottom: 24, right_bottom: 24,
+      }[props.type]}
+      ${{
+        left: 3, right: 3, // 3px
+        top: 16, bottom: 16, // 2n
+        left_top: 16, right_top: 16, // 2n
+        left_bottom: 16, right_bottom: 16,
+      }[props.type]}
+    `}
+  >
+    <path stroke='currentColor' fill='none' d={(() => {
+      switch(props.type) {
+        case 'left': case 'right':
+          return `M 0 1 H 16`
+        case 'top': case 'bottom':
+          return `M 1 0 V 16`
+        case 'left_top':
+          return `M 0 1 H 15 L 23 16` // 具体数值是多少还是得观察
+        case 'right_top':
+          return `M 1 16 L 8 1 H 23`
+        case 'left_bottom':
+          return `M 0 15 H 15 L 23 0`
+        case 'right_bottom':
+          return `M 1 0 L 8 15 H 23`
+      }
+    })()} />
+  </svg>
 
 export
-const Keyboard: FC<I_keyboard_props> = props => {
-  const size = props.size || 24
-  return <svg
-    width={size}
-    height={size}
-    viewBox="0 0 48 48" // 0 0 48 48
-  >
+const Keyboard: FC = () =>
+  <svg viewBox='0 0 48 48' className='keyboard'>
     <g fill="none"
       stroke="currentColor" strokeWidth="4"
       strokeLinejoin="round" strokeLinecap="round"
@@ -173,4 +180,3 @@ const Keyboard: FC<I_keyboard_props> = props => {
       <circle cx="38" cy="24" r="2" />
     </g>
   </svg>
-}

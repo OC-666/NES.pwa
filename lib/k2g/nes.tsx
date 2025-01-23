@@ -20,17 +20,57 @@ interface NES_gamepad_map_props {
 export
 const NES_gamepad_map: FC<NES_gamepad_map_props> = props => {
   const map = props.map.useState()
+  const activated_btn = props.ui.useState(s => s.activated_btn)
+  const activate = (key: I_NES_gamepad_btn) =>
+    () => props.ui.set_state(() => ({ activated_btn: key }))
+
   return <div className='k2g nes-container'>
     <div className='d-pad'>
+      <div className='left-right'>
+        <button
+          className={'gp-btn ' + (
+            activated_btn === 'left' ? 'waiting' : ''
+          )}
+          onClick={activate('left')}
+        >
+          <Arrow direction='left' />
+          <Line2kb
+            type='left'
+            target={map.left}
+          />
+        </button>
+        <button
+          className={'gp-btn ' + (
+            activated_btn === 'right' ? 'waiting' : ''
+          )}
+          onClick={activate('right')}
+        >
+          <Arrow direction='right' />
+          <Line2kb
+            type='right_bottom'
+            target={map.right}
+          />
+        </button>
+      </div>
       <div className='up-down'>
-        <button className='gp-btn'>
+        <button
+          className={'gp-btn ' + (
+            activated_btn === 'up' ? 'waiting' : ''
+          )}
+          onClick={activate('up')}
+        >
           <Arrow />
           <Line2kb
             type='left_top'
             target={map.up}
           />
         </button>
-        <button className='gp-btn'>
+        <button
+          className={'gp-btn ' + (
+            activated_btn === 'down' ? 'waiting' : ''
+          )}
+          onClick={activate('down')}
+        >
           <Arrow direction='down' />
           <Line2kb
             type='left_bottom'

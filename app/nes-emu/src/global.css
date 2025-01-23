@@ -4,6 +4,8 @@
 
   color: hsl(var(--fore-color));
   background-color: hsl(var(--back-color));
+
+  font-size: 16px;
 }
 
 button {

@@ -4,7 +4,8 @@ type I_color = [number, number, number]
 export
 const random_color = () => [
   Math.floor(Math.random() * 360),
-  Math.floor(Math.random() * 20 + 40),
+  // Math.floor(Math.random() * 20 + 40),
+  50,
   50,
 ]
 
