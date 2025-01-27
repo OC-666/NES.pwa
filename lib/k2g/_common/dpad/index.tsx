@@ -1,5 +1,5 @@
 import { Arrow } from './icon'
-import { Gamepad_btn } from './button'
+import { Gamepad_btn } from '../button'
 
 export
 function Dpad() {

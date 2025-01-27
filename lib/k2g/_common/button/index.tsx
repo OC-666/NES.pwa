@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
-import { I_position, Line2kb } from './icon'
-import { useCTX_required, create_required_ctx } from './context'
+import { I_label_position, Line2kb } from './icon'
+import { useCTX_required, create_required_ctx } from '../context'
 
 /** 通用的操作，通过 ctx 传入 */
 interface I_gamepad_btn_ctx {
@@ -16,7 +16,7 @@ const Gamepad_btn_ctx = create_required_ctx<I_gamepad_btn_ctx>()
 /** 需要定制的，通过 props 传入 */
 interface I_gamepad_btn_props<I_btn extends string> {
   from: I_btn
-  label_position: I_position
+  label_position: I_label_position
   children: ReactNode
 }
 

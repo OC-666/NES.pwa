@@ -1,56 +1,13 @@
-import { CSSProperties, FC, } from 'react'
-
-interface I_arrow_props {
-  style?: CSSProperties
-  size?: number
-  direction?: 'up' | 'down' | 'left' | 'right' | number
-}
+import { FC } from 'react'
 
 export
-const Arrow: FC<I_arrow_props> = props => {
-  const size = props.size ?? 16
-  return <svg
-    xmlns='http://www.w3.org/2000/svg'
-    viewBox={`0 0 ${size} ${size}`}
-    className='arrow'
-    style={props.style}
-  >
-    <polygon
-      fill='currentColor'
-      style={{
-        transformOrigin: 'center',
-        transform: props.direction === undefined
-          ? undefined
-          : `rotate(${
-            typeof(props.direction) === 'number'
-              ? props.direction + 'deg'
-              : ({
-                up: undefined,
-                down: '180deg',
-                left: '-90deg',
-                right: '90deg',
-              })[props.direction]
-            })`,
-      }}
-      points={`${size/2}, 0 0,${size} ${size},${size}`} 
-    />
-  </svg>
-}
-
-export
-type I_position = 'top' | 'bottom' | 'left' | 'right'
+type I_label_position = 'top' | 'bottom' | 'left' | 'right'
   | 'top_left' | 'top_right' | 'bottom_left' | 'bottom_right'
 
 interface I_line2kb_props {
-  type: I_position
+  type: I_label_position
   target: string
 }
-
-const format_keyname = (key: string) =>
-  (key.length === 4 && key.indexOf('Key') === 0)
-    ? key.slice(3)
-    : key
-
 export
 const Line2kb: FC<I_line2kb_props> = props =>
   <div
@@ -112,9 +69,8 @@ const Line2kb: FC<I_line2kb_props> = props =>
   </div>
 
 interface I_line_props {
-  type: I_position
+  type: I_label_position
 }
-
 const Line: FC<I_line_props> = props =>
   // const unit = 8
   <svg
@@ -181,3 +137,9 @@ const Keyboard: FC = () =>
       <circle cx="38" cy="24" r="2" />
     </g>
   </svg>
+
+function format_keyname(key: string) {
+  return (key.length === 4 && key.indexOf('Key') === 0)
+    ? key.slice(3)
+    : key
+}
