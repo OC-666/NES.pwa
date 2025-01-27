@@ -39,7 +39,7 @@ const Arrow: FC<I_arrow_props> = props => {
 
 export
 type I_position = 'top' | 'bottom' | 'left' | 'right'
-  | 'left_top' | 'right_top' | 'left_bottom' | 'right_bottom'
+  | 'top_left' | 'top_right' | 'bottom_left' | 'bottom_right'
 
 interface I_line2kb_props {
   type: I_position
@@ -67,13 +67,13 @@ const Line2kb: FC<I_line2kb_props> = props =>
             return { bottom: '100%', left: '50%' }
           case 'bottom':
             return { top: '100%', left: '50%' }
-          case 'left_top':
+          case 'top_left':
             return { right: '50%', bottom: '100%' }
-          case 'right_top':
+          case 'top_right':
             return { left: '50%', bottom: '100%' }
-          case 'left_bottom':
+          case 'bottom_left':
             return { right: '50%', top: '100%' }
-          case 'right_bottom':
+          case 'bottom_right':
             return { left: '50%', top: '100%' }
         }
       })(),
@@ -92,13 +92,13 @@ const Line2kb: FC<I_line2kb_props> = props =>
             return { bottom: '100%', left: 0, transform: 'translateX(-50%)' }
           case 'bottom':
             return { top: '100%', left: 0, transform: 'translateX(-50%)' }
-          case 'left_bottom':
+          case 'bottom_left':
             return { right: '100%', top: '100%', transform: 'translateY(-50%)' }
-          case 'left_top':
+          case 'top_left':
             return { right: '100%', top: 0, transform: 'translateY(-50%)' }
-          case 'right_bottom':
+          case 'bottom_right':
             return { left: '100%', top: '100%', transform: 'translateY(-50%)' }
-          case 'right_top':
+          case 'top_right':
             return { left: '100%', top: 0, transform: 'translateY(-50%)' }
         }
       })(),
@@ -121,21 +121,21 @@ const Line: FC<I_line_props> = props =>
     className={{
       left: 'h-line', right: 'h-line',
       top: 'v-line', bottom: 'v-line',
-      left_top: 'line', right_top: 'line',
-      left_bottom: 'line', right_bottom: 'line',
+      top_left: 'line', top_right: 'line',
+      bottom_left: 'line', bottom_right: 'line',
     }[props.type]}
     viewBox={`0 0
       ${{
         left: 16, right: 16, // 2n
         top: 3, bottom: 3, // 3px
-        left_top: 24, right_top: 24, // 3n
-        left_bottom: 24, right_bottom: 24,
+        top_left: 24, top_right: 24, // 3n
+        bottom_left: 24, bottom_right: 24,
       }[props.type]}
       ${{
         left: 3, right: 3, // 3px
         top: 16, bottom: 16, // 2n
-        left_top: 16, right_top: 16, // 2n
-        left_bottom: 16, right_bottom: 16,
+        top_left: 16, top_right: 16, // 2n
+        bottom_left: 16, bottom_right: 16,
       }[props.type]}
     `}
   >
@@ -145,13 +145,13 @@ const Line: FC<I_line_props> = props =>
           return `M 0 1 H 16`
         case 'top': case 'bottom':
           return `M 1 0 V 16`
-        case 'left_top':
+        case 'top_left':
           return `M 0 1 H 15 L 23 16` // 具体数值是多少还是得观察
-        case 'right_top':
+        case 'top_right':
           return `M 1 16 L 8 1 H 23`
-        case 'left_bottom':
+        case 'bottom_left':
           return `M 0 15 H 15 L 23 0`
-        case 'right_bottom':
+        case 'bottom_right':
           return `M 1 0 L 8 15 H 23`
       }
     })()} />
