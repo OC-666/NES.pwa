@@ -1,5 +1,13 @@
 /* gamepad button */
 .k2g {
+  line-height: 1;
+  button, input {
+    line-height: inherit;
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    font-weight: inherit;
+  }
   .gp-btn {
     display: block;
     background-color: transparent;

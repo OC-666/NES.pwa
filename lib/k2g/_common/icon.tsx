@@ -103,7 +103,7 @@ const Line2kb: FC<I_line2kb_props> = props =>
       })(),
     }}>
       {/* 注意：上面的 div 提供定位，下面的 div 提供样式 */}
-      <div className={'label'}>
+      <div className='label'>
         <Keyboard />
         <span>{format_keyname(props.target)}</span>
       </div>
