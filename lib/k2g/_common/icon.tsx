@@ -37,6 +37,7 @@ const Arrow: FC<I_arrow_props> = props => {
   </svg>
 }
 
+export
 type I_position = 'top' | 'bottom' | 'left' | 'right'
   | 'left_top' | 'right_top' | 'left_bottom' | 'right_bottom'
 

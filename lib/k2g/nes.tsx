@@ -1,83 +1,51 @@
-import { FC } from 'react'
-import { I_SDD } from 'react-sdd'
-import { Arrow, Line2kb } from './_common/icon'
+import { Dpad } from './_common/dpad'
+import { I_gamepad_props } from './_common/type'
+import { Gamepad_btn_ctx } from './_common/button'
 
 export
 type I_NES_gamepad_btn = 'left' | 'right' | 'up' | 'down'
   | 'select' | 'start' | 'A' | 'B'
 
-export
-type I_NES_gamepad_map = Record<I_NES_gamepad_btn, string>
-
-export
-interface NES_gamepad_map_props {
-  map: I_SDD<I_NES_gamepad_map>
-  ui: I_SDD<{
-    activated_btn: I_NES_gamepad_btn | null
-  }>
+function valid_key(key: string): key is I_NES_gamepad_btn {
+  return ['left', 'right', 'up', 'down', 'select', 'start', 'A', 'B'].includes(key)
 }
 
 export
-const NES_gamepad_map: FC<NES_gamepad_map_props> = props => {
+function NES_gamepad_map(props: I_gamepad_props<I_NES_gamepad_btn>) {
   const map = props.map.useState()
   const activated_btn = props.ui.useState(s => s.activated_btn)
-  const activate = (key: I_NES_gamepad_btn) =>
-    () => props.ui.set_state(() => ({ activated_btn: key }))
 
-  return <div className='k2g nes-container'>
-    <div className='d-pad'>
-      <div className='left-right'>
-        <button
-          className={'gp-btn ' + (
-            activated_btn === 'left' ? 'waiting' : ''
-          )}
-          onClick={activate('left')}
-        >
-          <Arrow direction='left' />
-          <Line2kb
-            type='left'
-            target={map.left}
-          />
-        </button>
-        <button
-          className={'gp-btn ' + (
-            activated_btn === 'right' ? 'waiting' : ''
-          )}
-          onClick={activate('right')}
-        >
-          <Arrow direction='right' />
-          <Line2kb
-            type='right_bottom'
-            target={map.right}
-          />
-        </button>
+  return (
+    <Gamepad_btn_ctx.Provider value={{
+      map,
+      bind: (from: string, to: string) => {
+        if (!valid_key(from))
+          throw Error('Invalid Key: ' + from)
+
+        props.ui.set_state(() => ({ activated_btn: null }))
+
+        if (map[from] === to)
+          return // unchanged
+        if (Object.values(map).includes(to)) { // 注意与上一个 if 的顺序
+          // noty.error('Key already bound')
+          return
+        }
+
+        props.map.set_state(() => ({ [from]: to }))
+      },
+      activated_btn,
+      activate: (key: string) => {
+        props.ui.set_state(() => {
+          if (valid_key(key)) // 动态判断 key 是否合法
+            return { activated_btn: key }
+          else
+            throw Error('Invalid Key: ' + key)
+        })
+      },
+    }}>
+      <div className='k2g nes-container'>
+        <Dpad />
       </div>
-      <div className='up-down'>
-        <button
-          className={'gp-btn ' + (
-            activated_btn === 'up' ? 'waiting' : ''
-          )}
-          onClick={activate('up')}
-        >
-          <Arrow />
-          <Line2kb
-            type='left_top'
-            target={map.up}
-          />
-        </button>
-        <button
-          className={'gp-btn ' + (
-            activated_btn === 'down' ? 'waiting' : ''
-          )}
-          onClick={activate('down')}
-        >
-          <Arrow direction='down' />
-          <Line2kb
-            type='left_bottom'
-            target={map.down}
-          />
-        </button>
-      </div>
-    </div>
-  </div>
+    </Gamepad_btn_ctx.Provider>
+  )
 }
