@@ -1,5 +1,5 @@
 .k2g.nes-container {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   padding: 3em;
   border: 1px solid hsla(var(--fore-color) / .3);

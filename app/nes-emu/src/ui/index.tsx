@@ -10,10 +10,11 @@ interface I_app_props {
 
 export
 const App: FC<I_app_props> = props => {
-  return <div style={{ padding: 200 }}>
+  return <div style={{ padding: 100 }}>
     <NES_gamepad_map
       map={props.app_state.user_settings.control.game}
       ui={props.app_state.ui.settings.control}
+      on_occupied={() => {}}
     />
   </div>
 }

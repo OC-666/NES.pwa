@@ -12,6 +12,7 @@
   --btn-bg: hsla(var(--fore-color) / .3);
   --unit-size: var(---unit-size, 1em);
   font-size: var(--unit-size);
+  display: inline;
 
   button, input {
     line-height: inherit;
