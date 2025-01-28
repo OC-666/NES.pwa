@@ -30,7 +30,7 @@
     svg.arrow {
       width: calc(.8 * var(--unit-size));
       height: calc(.8 * var(--unit-size));
-      opacity: .6;
+      color: hsla(var(--fore-color) / .4);
     }
   }
 }

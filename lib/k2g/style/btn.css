@@ -14,12 +14,17 @@
   }
 
   &.waiting {
-    svg.arrow {
-      opacity: 1;
-    }
     .label {
       animation: k2g-waiting .6s linear infinite;
     }
+    .from {
+      color: hsl(var(--fore-color));
+    }
+  }
+
+  .from {
+    color: hsla(var(--fore-color) / .6);
+    font-weight: 1000;
   }
 
   .label {
@@ -45,7 +50,7 @@
     width: calc(var(--unit-size) * 1.3);
   }
   svg.line, svg.v-line, svg.h-line {
-    opacity: .6;
+    color: hsla(var(--fore-color) / .5);
   }
   svg.line {
     width: calc(var(--unit-size) * 2);

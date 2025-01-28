@@ -17,6 +17,9 @@
       height: 4em;
       border-radius: 50%;
       background-color: var(--btn-bg);
+      .from {
+        font-size: 1.3em;
+      }
     }
   }
 
@@ -24,12 +27,11 @@
     position: absolute;
     margin: 0;
     top: 2em;
-    right: 7em;
+    right: 7.5em;
     padding: .6em 1em;
     border-radius: .25em;
 
     font-size: 1.2em;
     background-color: hsla(var(--fore-color) / .2);
-    color: hsla(var(--fore-color) / .4);
   }
 }
