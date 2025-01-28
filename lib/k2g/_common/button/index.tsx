@@ -1,38 +1,29 @@
 import { ReactNode } from 'react'
 import { I_label_position, Line2kb } from './icon'
-import { useCTX_required, create_required_ctx } from '../context'
+import { useCTX_k2g } from '../context'
 
-/** 通用的操作，通过 ctx 传入 */
-interface I_gamepad_btn_ctx {
-  map: Record<string, string>
-  activated_btn: string | null
-  activate: (f: string) => void
-  bind: (from: string, to: string) => void
-}
-
-export
-const Gamepad_btn_ctx = create_required_ctx<I_gamepad_btn_ctx>()
-
-/** 需要定制的，通过 props 传入 */
-interface I_gamepad_btn_props<I_btn extends string> {
-  from: I_btn
+/** 需要定制的（与其他 btn 不同），通过 props 传入 */
+interface I_gamepad_btn_props {
+  from: string
   label_position: I_label_position
   children: ReactNode
 }
 
 export
-function Gamepad_btn<I_btn extends string>(props: I_gamepad_btn_props<I_btn>) {
-  const ctx = useCTX_required(Gamepad_btn_ctx)
+function Gamepad_btn(props: I_gamepad_btn_props) {
+  const ctx = useCTX_k2g()
+  const activated = props.from === ctx.ui.useState(s => s.activated_btn)
+  const target = ctx.map.useState(s => s[props.from])
   return <button
-    className={'gp-btn ' + (
-      ctx.activated_btn === props.from ? 'waiting' : ''
-    )}
-    onClick={() => ctx.activate(props.from)}
+    className={'gp-btn ' + (activated  ? 'waiting' : '')}
+    onClick={() => {
+      ctx.ui.set_state(() => ({ activated_btn: props.from }))
+    }}
   >
     {props.children}
     <Line2kb
       type={props.label_position}
-      target={ctx.map[props.from]}
+      target={target}
     />
   </button>
 }
