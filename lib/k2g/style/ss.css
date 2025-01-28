@@ -1,8 +1,11 @@
 /* Select & Start */
 
 .k2g .ss {
-  display: flex;
   .gp-btn {
     background-color: var(--btn-bg);
+    height: 2em;
+    width: 6em;
+    padding: 0 1em;
+    border-radius: .25em;
   }
 }

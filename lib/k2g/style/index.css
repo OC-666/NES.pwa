@@ -9,8 +9,9 @@
   --back-color: var(---back-color, 255 255 255);
 
   line-height: 1;
-  --unit-size: var(---unit-size, 1em);
   --btn-bg: hsla(var(--fore-color) / .3);
+  --unit-size: var(---unit-size, 1em);
+  font-size: var(--unit-size);
 
   button, input {
     line-height: inherit;
