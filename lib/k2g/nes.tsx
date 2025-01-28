@@ -12,6 +12,7 @@ function NES_gamepad_map(props: I_k2g_ctx) {
         <D_pad />
         <SS />
         <AB />
+        <h5>老霸王 - NES</h5>
       </div>
     </CTX_k2g.Provider>
   )
@@ -20,10 +21,10 @@ function NES_gamepad_map(props: I_k2g_ctx) {
 /** Select & Start */
 function SS() {
   return <div className='ss'>
-    <Gamepad_btn from='select' label_position='top'>
+    <Gamepad_btn from='select' label_position='bottom'>
       <span className='from'>select</span>
     </Gamepad_btn>
-    <Gamepad_btn from='start' label_position='top'>
+    <Gamepad_btn from='start' label_position='bottom'>
       <span className='from'>start</span>
     </Gamepad_btn>
   </div>
@@ -32,10 +33,10 @@ function SS() {
 /** A & B */
 function AB() {
   return <div className='AB'>
-    <Gamepad_btn from='A' label_position='top'>
+    <Gamepad_btn from='A' label_position='bottom'>
       <span className='from'>A</span>
     </Gamepad_btn>
-    <Gamepad_btn from='B' label_position='top'>
+    <Gamepad_btn from='B' label_position='bottom'>
       <span className='from'>B</span>
     </Gamepad_btn>
   </div>

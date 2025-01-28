@@ -8,7 +8,7 @@ function D_pad() {
       <Gamepad_btn from='left' label_position='left'>
         <Arrow direction='left' />
       </Gamepad_btn>
-      <Gamepad_btn from='right' label_position='bottom_right'>
+      <Gamepad_btn from='right' label_position='top_right'>
         <Arrow direction='right' />
       </Gamepad_btn>
     </div>

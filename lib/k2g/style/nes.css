@@ -2,7 +2,7 @@
   display: inline-flex;
   align-items: center;
   padding: 4em 3em;
-  border: 1px solid hsla(var(--fore-color) / .3);
+  border: 1px solid hsla(var(--fore-color) / 1);
   border-radius: 1em;
   .ss {
     margin: 0 3em;
@@ -18,5 +18,18 @@
       border-radius: 50%;
       background-color: var(--btn-bg);
     }
+  }
+
+  h5 {
+    position: absolute;
+    margin: 0;
+    top: 2em;
+    right: 7em;
+    padding: .6em 1em;
+    border-radius: .25em;
+
+    font-size: 1.2em;
+    background-color: hsla(var(--fore-color) / .2);
+    color: hsla(var(--fore-color) / .4);
   }
 }
