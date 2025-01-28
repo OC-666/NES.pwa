@@ -11,6 +11,7 @@ function NES_gamepad_map(props: I_k2g_ctx) {
       <div className='k2g nes-container'>
         <D_pad />
         <SS />
+        <AB />
       </div>
     </CTX_k2g.Provider>
   )
@@ -24,6 +25,18 @@ function SS() {
     </Gamepad_btn>
     <Gamepad_btn from='start' label_position='top'>
       <span className='from'>start</span>
+    </Gamepad_btn>
+  </div>
+}
+
+/** A & B */
+function AB() {
+  return <div className='AB'>
+    <Gamepad_btn from='A' label_position='top'>
+      <span className='from'>A</span>
+    </Gamepad_btn>
+    <Gamepad_btn from='B' label_position='top'>
+      <span className='from'>B</span>
     </Gamepad_btn>
   </div>
 }
