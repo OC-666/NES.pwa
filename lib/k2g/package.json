@@ -4,6 +4,6 @@
   "type": "module",
   "exports": {
     "./nes": "./nes.tsx",
-    "./style": "./style.css"
+    "./style": "./style/index.css"
   }
 }
