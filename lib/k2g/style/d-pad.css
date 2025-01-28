@@ -1,69 +1,36 @@
-.k2g {
-  .d-pad {
+.k2g .d-pad {
+  width: calc(9 * var(--unit-size));
+  height: calc(9 * var(--unit-size));
+  position: relative;
+
+  /* up, down, left, right button */
+  .up-down, .left-right {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    background-color: hsla(var(--fore-color) / .3);
+    border-radius: calc(var(--unit-size) / 4);
+  }
+  .up-down {
+    left: calc(3 * var(--unit-size));
+    flex-direction: column;
+    height: calc(9 * var(--unit-size));
+  }
+  .left-right {
+    top: calc(3 * var(--unit-size));
+    width: calc(9 * var(--unit-size));
+  }
+
+  button {
     width: calc(3 * var(--unit-size));
     height: calc(3 * var(--unit-size));
-    position: relative;
+    display: grid;
+    place-items: center;
 
-    button {
-      width: var(--unit-size);
-      height: var(--unit-size);
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      .label {
-        display: flex;
-        align-items: center;
-        gap: .1em;
-
-        background-color: hsl(var(--fore-color));
-        color: hsl(var(--back-color));
-        opacity: .8;
-
-        padding: .1em .18em;
-        border-radius: .25rem;
-
-        span {
-          font-size: 1rem;
-          display: block;
-          padding-top: .1em;
-        }
-      }
-      svg.arrow {
-        width: .25em;
-        height: .25em;
-        opacity: .6;
-      }
-      svg.keyboard {
-        width: .4em;
-      }
-      svg.line, svg.v-line, svg.h-line {
-        opacity: .6;
-      }
-      svg.line {
-        width: .6em;
-      }
-      svg.h-line {
-        width: .4em;
-      }
-      svg.v-line {
-        height: .4em;
-      }
-    }
-    .up-down, .left-right {
-      position: absolute;
-      display: flex;
-      justify-content: space-between;
-      background-color: hsla(var(--fore-color) / .3);
-      border-radius: .25rem;
-    }
-    .up-down {
-      left: var(--unit-size);
-      flex-direction: column;
-      height: calc(3 * var(--unit-size));
-    }
-    .left-right {
-      top: var(--unit-size);
-      width: calc(3 * var(--unit-size));
+    svg.arrow {
+      width: calc(.8 * var(--unit-size));
+      height: calc(.8 * var(--unit-size));
+      opacity: .6;
     }
   }
 }

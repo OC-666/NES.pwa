@@ -1,0 +1,8 @@
+/* Select & Start */
+
+.k2g .ss {
+  display: flex;
+  .gp-btn {
+    background-color: var(--btn-bg);
+  }
+}

@@ -1,6 +1,8 @@
 :root {
-  --fore-color: 0 0 90;
-  --back-color: 0 0 10;
+  ---fore-color: 0 0 90;
+  ---back-color: 0 0 10;
+  --fore-color: var(---fore-color);
+  --back-color: var(---back-color);
 
   color: hsl(var(--fore-color));
   background-color: hsl(var(--back-color));

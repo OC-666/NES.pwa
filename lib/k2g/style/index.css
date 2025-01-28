@@ -1,11 +1,16 @@
+@import url(./btn.css);
 @import url(./d-pad.css);
 @import url(./nes.css);
+@import url(./ss.css);
 
 /* gamepad button */
 .k2g {
+  --fore-color: var(---fore-color, 0 0 0);
+  --back-color: var(---back-color, 255 255 255);
+
   line-height: 1;
-  --unit-size: 3rem;
-  font-size: var(--unit-size);
+  --unit-size: var(---unit-size, 1em);
+  --btn-bg: hsla(var(--fore-color) / .3);
 
   button, input {
     line-height: inherit;
@@ -13,28 +18,6 @@
     font-size: inherit;
     font-family: inherit;
     font-weight: inherit;
-  }
-  .gp-btn {
-    display: block;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    padding: 0;
-
-    position: relative;
-
-    svg {
-      display: block;
-    }
-
-    &.waiting {
-      svg.arrow {
-        opacity: 1;
-      }
-      .label {
-        animation: k2g-waiting .6s linear infinite;
-      }
-    }
   }
 }
 
