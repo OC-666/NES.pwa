@@ -2,7 +2,7 @@ import { Arrow } from './icon'
 import { Gamepad_btn } from '../button'
 
 export
-function Dpad() {
+function D_pad() {
   return <div className='d-pad'>
     <div className='left-right'>
       <Gamepad_btn from='left' label_position='left'>
